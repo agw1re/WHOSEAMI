@@ -6,6 +6,73 @@
     <title>Photo Sticker Studio</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/5.3.0/fabric.min.js"></script>
     <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f8f8;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            max-width: 900px;
+            width: 100%;
+        }
+        header {
+            text-align: left;
+            margin-bottom: 20px;
+        }
+        .stickers-panel {
+            background: white;
+            padding: 15px;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 200px;
+            text-align: left;
+        }
+        .stickers img {
+            width: 50px;
+            margin: 5px;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        .stickers img:hover {
+            transform: scale(1.1);
+        }
+        .canvas-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+        }
+        .polaroid {
+            background: white;
+            padding: 20px 20px 50px;
+            border-radius: 10px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            position: relative;
+        }
+        canvas {
+            background: white;
+            display: block;
+        }
+        button {
+            margin-top: 10px;
+            padding: 10px 20px;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
@@ -13,7 +80,7 @@
             <h1>Photo Sticker Studio</h1>
             <p>Add fun stickers to your photos and download your creation!</p>
         </header>
-        <main>
+        <main style="display: flex; gap: 20px;">
             <aside class="stickers-panel">
                 <h2>Choose a Sticker</h2>
                 <div class="stickers">
