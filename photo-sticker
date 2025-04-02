@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photo Sticker App</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/5.3.0/fabric.min.js"></script>
+    <style>
+        body { text-align: center; font-family: Arial, sans-serif; }
+        canvas { border: 1px solid #ddd; margin-top: 10px; }
+        .controls { margin: 10px; }
+        .stickers img { width: 50px; cursor: pointer; margin: 5px; }
+    </style>
+</head>
+<body>
+    <h2>Upload Photo & Add Stickers</h2>
+    <input type="file" id="upload" accept="image/*">
+    <div class="stickers">
+        <img src="sticker1.png" onclick="addSticker(this)">
+        <img src="sticker2.png" onclick="addSticker(this)">
+    </div>
+    <canvas id="canvas"></canvas>
+    <button onclick="downloadImage()">Download</button>
+
+    <script>
+        let canvas = new fabric.Canvas('canvas');
+        document.getElementById('upload').addEventListener('change', function(event) {
+            let reader = new FileReader();
+            reader.onload = function(e) {
+                fabric.Image.fromURL(e.target.result, function(img) {
+                    canvas.clear();
+                    img.scaleToWidth(500);
+                    canvas.setWidth(img.width);
+                    canvas.setHeight(img.height);
+                    canvas.add(img);
+                    canvas.renderAll();
+                });
+            };
+            reader.readAsDataURL(event.target.files[0]);
+        });
+        function addSticker(img) {
+            fabric.Image.fromURL(img.src, function(sticker) {
+                sticker.scale(0.3);
+                sticker.set({ left: 100, top: 100 });
+                canvas.add(sticker);
+            });
+        }
+        function downloadImage() {
+            let link = document.createElement('a');
+            link.download = 'photo-sticker.png';
+            link.href = canvas.toDataURL();
+            link.click();
+        }
+    </script>
+</body>
+</html>
